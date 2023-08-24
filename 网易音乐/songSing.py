@@ -32,13 +32,13 @@ class RandomSong(Plugin):
         elif content == "登录":
             reply = Reply()
             reply.type = ReplyType.TEXT
-            reply.content = "https://service-r4ko3cqs-1317523351.gz.apigw.tencentcs.com/qrlogin.html"
+            reply.content = "填上你的网易云api的URL/qrlogin.html"
             e_context["reply"] = reply
             e_context.action = EventAction.BREAK_PASS
 
     def get_song(self,e_context, query):
         try:
-            url = "https://service-r4ko3cqs-1317523351.gz.apigw.tencentcs.com/release/search"
+            url = "填上你的网易云api的URL/release/search"
             params = {
                 'keywords': query,
                 'limit': 1
@@ -47,7 +47,7 @@ class RandomSong(Plugin):
             if response.status_code == 200:
                 data = response.json()
                 first_id = data['result']['songs'][0]['id']
-                res_url = "https://service-r4ko3cqs-1317523351.gz.apigw.tencentcs.com/release/check/music"
+                res_url = "填上你的网易云api的URL/release/check/music"
                 params = {
                     'id': first_id
                 }
@@ -57,7 +57,7 @@ class RandomSong(Plugin):
                     data = res_response.json()
                     context = data['message']
                     if context == "ok":
-                        song_url = "https://service-r4ko3cqs-1317523351.gz.apigw.tencentcs.com/release/url/v1"
+                        song_url = "填上你的网易云api的URL/release/url/v1"
                         params = {
                             'id': first_id,
                             'level': "exhigh"
