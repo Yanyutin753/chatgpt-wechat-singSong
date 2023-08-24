@@ -3,7 +3,7 @@
 这是一个用于在你的应用中播放网易云音乐的插件，它利用网易云音乐的API实现了多种功能，包括播放指定音乐、用户登录以及VIP音乐的支持。你还可以根据[网易云api](https://neteasecloudmusicapi.vercel.app/#/)，自行拓展更多功能。
 
 ## 功能特性
-  调用自己部署的[网易云音乐的API](https://github.com/Binaryify/NeteaseCloudMusicApi)
+- 调用自己部署的[网易云音乐的API](https://github.com/Binaryify/NeteaseCloudMusicApi)
 - 播放指定音乐：通过调用网易云音乐的API，你可以输入音乐ID或链接来播放指定的音乐。
 - 用户登录：支持用户登录功能，使用户可以登录自己的网易云音乐账号。
 - VIP音乐支持：一旦用户登录，插件将允许播放VIP音乐，让用户畅享更多高质量音乐。
