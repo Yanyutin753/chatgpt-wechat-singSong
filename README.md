@@ -22,7 +22,7 @@
 三是浏览器访问你们部署的网站加/qrlogin.html，进行登录
 按照你们的需求，自行修改代码实现登录
 
-##使用情况
+## 使用情况
 
 ![505d3ec6fbdce237d3619ca2854db18](https://github.com/Yanyutin753/chatgpt-wechat-singSong/assets/132346501/27017915-1d7c-4413-a8fe-b04cc2c3b652)
 
