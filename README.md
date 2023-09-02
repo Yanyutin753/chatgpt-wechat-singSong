@@ -22,6 +22,14 @@
 三是浏览器访问你们部署的网站加/qrlogin.html，进行登录
 按照你们的需求，自行修改代码实现登录
 
+##使用情况
+
+![505d3ec6fbdce237d3619ca2854db18](https://github.com/Yanyutin753/chatgpt-wechat-singSong/assets/132346501/27017915-1d7c-4413-a8fe-b04cc2c3b652)
+
+![3372ce45d0d01c9c8d2bdd1d832e943](https://github.com/Yanyutin753/chatgpt-wechat-singSong/assets/132346501/794c3699-5e8d-45f9-96df-5f01bfcf45a0)
+
+![70eaa417c9b3cc6e3cc668f0b53feea](https://github.com/Yanyutin753/chatgpt-wechat-singSong/assets/132346501/29000ddf-db40-4948-aef6-85ff0129ba09)
+
 
 ## 贡献与支持
 欢迎贡献代码，提出问题和建议。如果你发现了bug或者有新的功能想法，请提交一个Issue让我知道。你也可以通过Fork项目并提交Pull Request来贡献代码。
