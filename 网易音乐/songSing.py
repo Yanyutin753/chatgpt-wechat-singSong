@@ -34,12 +34,12 @@ class RandomSong(Plugin):
         elif content == "网易云登录":
             reply = Reply()
             reply.type = ReplyType.TEXT
-            reply.content = "\nhttps://www.yang-music.fun/qrlogin.html"
+            reply.content = "\n你的网易云部署api/qrlogin.html"
             e_context["reply"] = reply
             e_context.action = EventAction.BREAK_PASS
             
         elif content == "网易云用户":
-            url = "https://www.yang-music.fun/user/account"
+            url = "你的网易云部署api/user/account"
             # 发送GET请求获取网页内容
             response = requests.get(url)
             # 检查响应状态码
@@ -70,7 +70,7 @@ class RandomSong(Plugin):
             
     def get_song(self, e_context, query):
         try:
-            url = "https://www.yang-music.fun/search"
+            url = "你的网易云部署api/search"
             params = {
                 'keywords': query,
                 'limit': 5
@@ -81,7 +81,7 @@ class RandomSong(Plugin):
                 all_false = True  # 用于跟踪所有ID的data['message']是否都为False的标志
                 for song in data['result']['songs']:
                     song_id = song['id']
-                    res_url = "https://www.yang-music.fun/check/music"
+                    res_url = "你的网易云部署api/check/music"
                     params = {
                         'id': song_id
                     }
@@ -90,29 +90,44 @@ class RandomSong(Plugin):
                         data = res_response.json()
                         context = data['message']
                         if context == "ok":
-                            song_url = "https://www.yang-music.fun/song/url/v1"
+                            song_url = "你的网易云部署api/song/url/v1"
                             params = {
                                 'id': song_id,
                                 'level': "exhigh"
                             }
                             song_response = requests.get(song_url, params=params)
                             if song_response.status_code == 200:
-                                song_info = song_response.json()
-                                voice_url = song_info['data'][0]['url']
-                                voicetest = "<a href = \"{}\">{}</a>".format(voice_url, "🎶点击播放" + query)
+                                # 企业微信无法转化音乐为单音道，且转化之后音质很差，于是可以想着发送超链接
+                                # song_info = song_response.json()
+                                # voice_url = song_info['data'][0]['url']
+                                # voicetest = "<a href = \"{}\">{}</a>".format(voice_url, "🎶点击播放" + query)
                                 
-                                # 创建回复对象并设置内容
-                                reply = Reply()
-                                reply.type = ReplyType.TEXT
-                                reply.content = voicetest
+                                # # 创建回复对象并设置内容
+                                # reply = Reply()
+                                # reply.type = ReplyType.TEXT
+                                # reply.content = voicetest
                                 
-                                # 将回复对象添加到事件上下文
-                                e_context["reply"] = reply
+                                # # 将回复对象添加到事件上下文
+                                # e_context["reply"] = reply
                                 
                                 # 设置事件动作
                                 e_context.action = EventAction.BREAK_PASS  # 事件结束，并跳过处理context的默认逻辑
-                                
-                                # 返回结果
+
+                                # 发送MP3文件，可以使用除了企业微信之外的部署方式
+                                reply = Reply()
+                                song_info = song_response.json()
+                                reply.type = ReplyType.VOICE
+                                voice_url = song_info['data'][0]['url']
+                                fileName = query + ".mp3"
+                                try:
+                                    urllib.request.urlretrieve(voice_url, fileName)
+                                    print("文件下载成功")
+                                except Exception as e:
+                                    print("文件下载出错:", e)
+                                reply.content = fileName
+                                e_context["reply"] = reply
+                                e_context.action = EventAction.BREAK_PASS  # 事件结束，并跳过处理context的默认逻辑
+                                返回结果
                                 return
                         else:
                             all_false = False  # 至少有一个ID的data['message']为True
