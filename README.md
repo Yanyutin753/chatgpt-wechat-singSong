@@ -20,7 +20,7 @@
 
 ## 登录
 登录的方式有三种：
-一是管理员登录，在godcmd插件添加相应的代码。[具体可参考下面文档]([https://github.com/Binaryify/NeteaseCloudMusicApi](https://github.com/Yanyutin753/chatgpt-wechat-/blob/main/%E7%BD%91%E6%98%93%E9%9F%B3%E4%B9%90/godcmd.py.temp))
+一是管理员登录，在godcmd插件添加相应的代码。[具体可参考下面文档](https://github.com/Yanyutin753/chatgpt-wechat-singSong/blob/main/godcmd.py.temp)
 二是输入登录，扫描二维码进行登录。
 三是浏览器访问你们部署的网站加/qrlogin.html，进行登录
 按照你们的需求，自行修改代码实现登录
