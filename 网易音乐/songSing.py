@@ -12,6 +12,7 @@ from PIL import Image
 from common.tmp_dir import TmpDir
 import urllib.request
 import urllib.parse
+import os
 
 @plugins.register(
     name="songSing",
@@ -24,9 +25,17 @@ import urllib.parse
 class RandomSong(Plugin):
     def __init__(self):
         super().__init__()
-        self.handlers[Event.ON_HANDLE_CONTEXT] = self.on_handle_context
-        logger.info("[songSing] inited")
-
+        try:
+            conf = super().load_config()
+            if not conf:
+                raise Exception("config.json not found")
+            self.api_url = conf["api_url"]
+            self.handlers[Event.ON_HANDLE_CONTEXT] = self.on_handle_context
+            logger.info("[songSing] inited")
+        except Exception as e:
+            logger.warn("[songSing] init failed, ignore ")
+            raise e
+        
     def on_handle_context(self, e_context: EventContext):
         content = e_context["context"].content
         if content.startswith("播放"):
@@ -34,12 +43,12 @@ class RandomSong(Plugin):
         elif content == "网易云登录":
             reply = Reply()
             reply.type = ReplyType.TEXT
-            reply.content = "\n你的网易云部署api/qrlogin.html"
+            reply.content = f"{self.api_url}/qrlogin.html"
             e_context["reply"] = reply
             e_context.action = EventAction.BREAK_PASS
             
         elif content == "网易云用户":
-            url = "你的网易云部署api/user/account"
+            url = f"{self.api_url}/user/account"
             # 发送GET请求获取网页内容
             response = requests.get(url)
             # 检查响应状态码
@@ -70,7 +79,7 @@ class RandomSong(Plugin):
             
     def get_song(self, e_context, query):
         try:
-            url = "你的网易云部署api/search"
+            url = f"{self.api_url}/search"
             params = {
                 'keywords': query,
                 'limit': 5
@@ -81,7 +90,7 @@ class RandomSong(Plugin):
                 all_false = True  # 用于跟踪所有ID的data['message']是否都为False的标志
                 for song in data['result']['songs']:
                     song_id = song['id']
-                    res_url = "你的网易云部署api/check/music"
+                    res_url = f"{self.api_url}/check/music"
                     params = {
                         'id': song_id
                     }
@@ -90,7 +99,7 @@ class RandomSong(Plugin):
                         data = res_response.json()
                         context = data['message']
                         if context == "ok":
-                            song_url = "你的网易云部署api/song/url/v1"
+                            song_url = f"{self.api_url}/song/url/v1"
                             params = {
                                 'id': song_id,
                                 'level': "exhigh"
@@ -118,13 +127,14 @@ class RandomSong(Plugin):
                                 song_info = song_response.json()
                                 reply.type = ReplyType.VOICE
                                 voice_url = song_info['data'][0]['url']
-                                fileName = query + ".mp3"
+                                file_name = query + ".mp3"
+                                file_path = os.path.join("tmp", file_name)
                                 try:
-                                    urllib.request.urlretrieve(voice_url, fileName)
+                                    urllib.request.urlretrieve(voice_url, file_path)
                                     print("文件下载成功")
                                 except Exception as e:
                                     print("文件下载出错:", e)
-                                reply.content = fileName
+                                reply.content = file_path
                                 e_context["reply"] = reply
                                 e_context.action = EventAction.BREAK_PASS  # 事件结束，并跳过处理context的默认逻辑
                                 返回结果
