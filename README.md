@@ -12,8 +12,8 @@
 ## 安装与使用
 
 1. 部署[网易云音乐的API](https://github.com/Binaryify/NeteaseCloudMusicApi)（推荐Vercel部署，具体可阅读[详细文档](https://github.com/Binaryify/NeteaseCloudMusicApi))
-1. 下载插件并将其添加到你的plugins文件夹中。
-2. 根据提供的示例代码，修改[singSong.py]里的接口地址，实现各种功能。
+2. 下载插件并将其添加到你的plugins文件夹中，或使用godcmd安装：#installp https://github.com/befantasy/singsong.git
+3. 修改config.json.template中的api地址，并将文件重命名为config.json。
 3. 企业微信由于只能用amr文件的原因，立体音转单体音，音质转换会很难听，强烈使用链接方式发送，只需要注释相关代码即可，使用TEXT部分。
 4. 公众号的语言需要微信审核，所以会比较慢，由于原有的对付审核的时间，已经不能满足我们的需求，所以要么更改代码（可以参考[WeChatmp.channel](https://github.com/Yanyutin753/chatgpt-wechat-singSong/blob/main/wechatmp_channel.py)里的代码），要么使用链接方式发送！
    
