@@ -80,14 +80,14 @@ class singsong(Plugin):
 
     def get_song(self, e_context, query):
         def is_song_available(song_id):
-            res_url = f"{self.api_url}/check/music"
+            check_url = f"{self.api_url}/check/music"
             check_params = {
                 'id': song_id,
                 'realIP': self.fakeIP
             }
-            res_response = requests.get(res_url, params=check_params)
-            if res_response.status_code == 200:
-                data = res_response.json()
+            check_response = requests.get(check_url, params=check_params)
+            if check_response.status_code == 200:
+                data = check_response.json()
                 context = data.get('message')
                 if context == "ok":
                     logger.info(f"[singsong] Music ID：{song_id} 可用")
@@ -123,9 +123,9 @@ class singsong(Plugin):
             'keywords': query,
             'limit': 10
         }
-        response = requests.get(url, params=search_params)
-        if response.status_code == 200:
-            data = response.json()
+        search_result = requests.get(url, params=search_params)
+        if search_result.status_code == 200:
+            data = search_result.json()
             if data['result']['songCount'] == 0:
                 reply = Reply()
                 reply.type = ReplyType.TEXT
@@ -143,7 +143,7 @@ class singsong(Plugin):
                     else:
                         reply = Reply()
                         reply.type = ReplyType.TEXT
-                        reply.content = "版权问题，无法播放。。"
+                        reply.content = "版权问题，无法播放。"
                         e_context["reply"] = reply
                         e_context.action = EventAction.BREAK_PASS
 
