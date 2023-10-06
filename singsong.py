@@ -30,7 +30,6 @@ class singsong(Plugin):
             if not conf:
                 raise Exception("config.json not found")
             self.api_url = conf["api_url"]
-            self.fakeIP = conf["fakeIP"]
             self.handlers[Event.ON_HANDLE_CONTEXT] = self.on_handle_context
             logger.info("[singsong] inited")
         except Exception as e:
@@ -85,7 +84,6 @@ class singsong(Plugin):
             check_url = f"{self.api_url}/check/music"
             check_params = {
                 'id': song_id,
-                'realIP': self.fakeIP
             }
             check_response = requests.get(check_url, params=check_params)
             if check_response.status_code == 200:
@@ -102,7 +100,6 @@ class singsong(Plugin):
             download_params = {
                 'id': song_id,
                 'level': "exhigh",
-                'realIP': self.fakeIP
             }
             song_response = requests.get(song_url, params=download_params)
             if song_response.status_code == 200:
