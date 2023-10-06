@@ -15,12 +15,12 @@
 1. 下载插件并将其添加到你的plugins文件夹中。
 2. 根据提供的示例代码，修改[singSong.py]里的接口地址，实现各种功能。
 3. 企业微信由于只能用amr文件的原因，立体音转单体音，音质转换会很难听，强烈使用链接方式发送，只需要注释相关代码即可，使用TEXT部分。
-4. 公众号的语言需要微信审核，所以会比较慢，由于原有的对付审核的时间，已经不能满足我们的需求，所以要么更改代码（可以参考[WeChatmp.channel](https://github.com/Yanyutin753/chatgpt-wechat-singSong/blob/main/wechatmp_channel.py)里的代码），要么使用链接方式发送！
+4. 公众号的语言需要微信审核，所以会比较慢，由于原有的对付审核的时间，已经不能满足我们的需求，所以要么更改代码（可以参考[WeChatmp.channel](https://github.com/Yanyutin753/chatgpt-wechat-singSong/blob/main/%E6%9D%82%E9%A1%B9/wechatmp_channel.py)里的代码），要么使用链接方式发送！
    
 
 ## 登录
 登录的方式有三种：
-一是管理员登录，在godcmd插件添加相应的代码。[具体可参考下面文档](https://github.com/Yanyutin753/chatgpt-wechat-singSong/blob/main/godcmd.py.temp)
+一是管理员登录，在godcmd插件添加相应的代码。[具体可参考下面文档](https://github.com/Yanyutin753/chatgpt-wechat-singSong/blob/main/%E6%9D%82%E9%A1%B9/godcmd.py.temp)
 二是输入登录，扫描二维码进行登录。
 三是浏览器访问你们部署的网站加/qrlogin.html，进行登录
 按照你们的需求，自行修改代码实现登录
