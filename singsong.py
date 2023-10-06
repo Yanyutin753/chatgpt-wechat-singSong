@@ -108,21 +108,19 @@ class singsong(Plugin):
             if song_response.status_code == 200:
                 song_info = song_response.json()
                 voice_url = song_info["data"][0]["url"]
-                # 企业微信无法转化音乐为单音道，且转化之后音质很差，于是可以想着发送超链接
-                # song_info = song_response.json()
-                # voice_url = song_info['data'][0]['url']
-                # voicetest = "<a href = \"{}\">{}</a>".format(voice_url, "🎶点击播放" + query)
 
+                
+                # 企业微信无法转化音乐为单音道，且转化之后音质很差，于是可以想着发送超链接
+                # voicetest = "<a href = \"{}\">{}</a>".format(voice_url, "🎶点击播放" + query)
                 # # 创建回复对象并设置内容
                 # reply = Reply()
                 # reply.type = ReplyType.TEXT
                 # reply.content = voicetest
-
                 # # 将回复对象添加到事件上下文
                 # e_context["reply"] = reply
-
-
                 # 发送MP3文件，可以使用除了企业微信之外的部署方式
+
+                
                 file_name = query + ".mp3"
                 file_path = os.path.join("tmp", file_name)
                 try:
