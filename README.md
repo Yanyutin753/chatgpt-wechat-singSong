@@ -1,5 +1,5 @@
 # chatgpt-wechat-网易云音乐播放插件
-
+## 适用于chatgpt-on-wechat项目插件
 这是一个用于在你的应用中播放网易云音乐的插件，它利用网易云音乐的API实现了多种功能，包括播放指定音乐、用户登录以及VIP音乐的支持。你还可以根据[网易云api](https://neteasecloudmusicapi.vercel.app/#/)，自行拓展更多功能。
 
 ## 功能特性
